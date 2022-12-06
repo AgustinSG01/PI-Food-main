@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetailRecipe } from "../../actions/getDetailRecipe"
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import "./detailedFoodCard.css"
 
 export default function DetailedFoodCard () {
     
@@ -17,32 +18,40 @@ export default function DetailedFoodCard () {
     },[dispatch])
 
     return (
-        <div>
-            <img src={recipeID.image} alt="image not found"/>
-            <h1> {recipeID.title} </h1>
+        <div className="genetailDetailContainer">
             <div>
-                <h3> {recipeID.healthScore} </h3>
-            </div>
-                <ul>
+            <img src={recipeID.image} alt="image not found" className="detailImage"/>
+            <h1 className="detailTitle"> {recipeID.title} </h1>
+                <h3 className="detailHealthscore"> {recipeID.healthScore} </h3>
+                <h2 className="dietsTitle">Diets: </h2>
+                <ul className="diets">
                 {
-                    recipeID.diets?.map(e => <li> {e} </li>)
+                    recipeID.diets?.map(e => <li className="eachdiet"> {e},  </li>)
                 }
                 </ul>
+                <h2 className="dishTypesTitle">Dishtypes: </h2>
+                <ul className="dishTypes">
+                    {
+                        Array.isArray(recipeID.dishTypes) ? recipeID.dishTypes.map(e => <li className="eachDishType"> {e + "," + " "} </li>) : <p> {recipeID.dishTypes} </p>
+                    }
+                </ul>
+            </div>
             
-            <p> {recipeID.summary} </p>
+            <p className="summary"> {recipeID.summary} </p>
             <div>
-            <h2>Steps:</h2>
+            
+            <h2 className="stepsTitle">Steps:</h2>
+            <ol className="steps">
+
                 {
-               recipeID.stepByStep ? recipeID.stepByStep.map(e => {
-                console.log(e)    
-                return (<div>
-                        <h3>Step {e.number}</h3>
-                        <p>Ingredients: {e.ingredients.join()}</p>
-                        <p> {e.step} </p>
-                        </div>
-                        ) 
-                    }) : <h2>No steps available</h2>
-                }
+                    recipeID.stepByStep ? recipeID.stepByStep.map(e => {
+                        console.log(e)  
+                        return (
+                            <li className="eachStep"> {e} </li>
+                            ) 
+                        }) : <div className="failcontainer"><h2>There's no steps</h2></div>
+                    }
+            </ol>
                 
             </div>
 

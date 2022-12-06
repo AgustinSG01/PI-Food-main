@@ -1,0 +1,84 @@
+.genetailDetailContainer {
+    display: flex;
+    margin: 0vh;
+    background-color: bisque;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.detailImage {
+   float: left;
+   width: 35%;
+   border: black solid;
+}
+
+.detailTitle {
+    color: #041122;
+    margin-top: 80px;
+    font-family: sans-serif;
+}
+
+.detailHealthscore {
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.dietsTitle {
+    margin-top: 25px;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.diets {
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+.dishTypesTitle {
+    margin-top: 25px;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.dishTypes {
+    margin-top: 15px;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+.summary {
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-left: 140px;
+    width: 80%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.stepsTitle {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.steps {
+    width: 80%;
+    text-align: center;
+    justify-content: center;
+    margin-left: 140px;
+}
+
+.eachStep {
+    margin: 20px;
+}
+
+.failcontainer {
+    height: 94px;
+    align-items: center;
+    justify-content: center;
+    background-color: bisque;
+}

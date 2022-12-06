@@ -24,12 +24,15 @@ module.exports = sequelize => {
       defaultValue: null
     },
     stepByStep: {
-      type: DataTypes.TEXT,
-      defaultValue: "There's no steps"
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: ["There's no steps"]
     },
     image: {
       type: DataTypes.STRING,
-      defaultValue: "There's no image"
+      defaultValue: "https://static.vecteezy.com/system/resources/previews/002/621/145/large_2x/chef-kitchen-restaurant-catering-food-line-style-icon-free-vector.jpg"
     },
+    dishTypes: {
+      type: DataTypes.STRING
+    }
   });
 };

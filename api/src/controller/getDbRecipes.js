@@ -3,7 +3,7 @@ const { Recipe, Type } = require("../db.js")
 const getDbRecipes = async () => {
     try {
         
-        return await Recipe.findAll({
+        const recipes = await Recipe.findAll({
             include: {
                 model: Type,
                 attributes:["name"],
@@ -12,22 +12,19 @@ const getDbRecipes = async () => {
                 }
             }
         }) 
-
-        // const allDbRecipes = await allInDb.map(recipe => {
-        //     const allTypes = recipe.Types?.map(type => type.name);
-        //     return {
-        //         id: recipe.id,
-        //         title: recipe.title,
-        //         summary: recipe.summary,
-        //         healthScore: recipe.healthScore,
-        //         stepByStep: recipe.stepByStep,
-        //         image: recipe.image,
-        //         diets: allTypes
-            // }
-        // })
-
-        // return allDbRecipes
-
+        return recipes.map(e => {
+            return {
+                id: e.id,
+                title: e.title,
+                summary: e.summary,
+                healthScore: e.healthScore,
+                stepByStep: e.stepByStep,
+                image: e.image,
+                diets: e.Types.map(e => e.name),  
+                dishTypes: e.dishTypes
+            }
+        })
+        // return recipes
     } catch (error) {
         
         console.log(error)

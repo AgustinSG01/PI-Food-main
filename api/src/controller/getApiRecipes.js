@@ -14,16 +14,12 @@ const getApiRecipes = async () => {
         return {
             id: recipe.id,
             title: recipe.title,
-            summary: recipe.summary.replace(/( |<([^>]+)>)/ig," "),
+            summary: recipe.summary.replaceAll(/<(“[^”]”|'[^’]’|[^'”>])*>/g, ""),
             healthScore: recipe.healthScore,
-            stepByStep: recipe.analyzedInstructions[0]?.steps.map(e => {
-                return {
-                    number: e.number,
-                    step: e.step,
-                    ingredients: e.ingredients.map(e => e.name)
-                }}),
+            stepByStep: recipe.analyzedInstructions[0]?.steps.map(e => e.step),
             image: recipe.image,
-            diets: recipe.diets
+            diets: recipe.diets,
+            dishTypes: recipe.dishTypes
         }
     })
     

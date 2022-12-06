@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Recipe } = require("../db.js")
+const { Recipe, Type } = require("../db.js")
 const getAllRecipes = require("../controller/getAllRecipes.js");
 const router = Router()
 
@@ -24,14 +24,14 @@ router.get("/recipes", async(req, res) => {
     const allRecipes = await getAllRecipes()
 try {
     if (title) {
-        const titleRecipes = allRecipes.filter(recipe => recipe.title.toLowerCase() === title.toLowerCase())
+        const titleRecipes = allRecipes.filter(recipe => recipe.title.toLowerCase().includes(title.toLowerCase())) 
         titleRecipes.length ? res.status(200).json(titleRecipes) : res.status(404).send("Recipe not found")
     } else {
         res.status(200).json(allRecipes)
     }
 //    
 } catch (error) {
-    res.status(404).send({ error: error.message})
+    res.status(404).send({error: error.message})
 }
 } 
 ) 
@@ -43,7 +43,7 @@ router.get("/recipes/:id", async (req, res) => {
 
     try {
         if (!id) {
-            res.status(404).send("Insert a recipe ID") 
+            res.status(404).send("Insert a valid recipe ID") 
         } else {
            
             let recipe = await allRecipes.filter(recipe => recipe.id == id)
@@ -65,10 +65,14 @@ router.get("/recipes/:id", async (req, res) => {
 
 
 router.post("/recipes", async (req, res) => {
-    const { title, summary } = req.body
+    const { title, summary, healthScore, stepByStep, image, name, dishTypes } = req.body
      if (!title || !summary) res.status(400).json({error: "The recipe needs a title and a summary"})
      try {
-        const recipe = await Recipe.create(req.body)
+        const recipe = await Recipe.create({title, summary, healthScore, stepByStep, image, dishTypes})
+        const diet = await Type.findAll({
+            where: {name}
+        })
+       await recipe.addType(diet)
         res.status(200).send("Recipe created")
     } catch (error) {
         res.status(404).send(error.message)
@@ -80,14 +84,19 @@ router.post("/recipes", async (req, res) => {
 router.get("/diets", async (req, res) => {
     try {
         
-        res.status(200).json(dietsLocal)
+        dietsLocal.forEach(e => {
+            Type.findOrCreate({
+                where: {name: e}
+            })
+        })
 
+        const diets = await Type.findAll()
+
+        res.status(200).send(diets)
     } catch (error) {
         console.log(error)        
     }
 })
-
-
  
 
 module.exports = router

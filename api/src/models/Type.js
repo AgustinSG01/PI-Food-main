@@ -8,19 +8,8 @@ module.exports = (sequelize) => {
             primaryKey: true
         },
         name: {
-            type: DataTypes.ENUM("gluten free",
-            "ketogenic",
-            "lacto ovo vegetarian",
-            "vegan",
-            "pescatarian",
-            "paleolithic",
-            "primal",
-            "fodmap friendly",
-            "whole 30",
-            "dairy free",
-            "vegetarian",
-            "lacto vegetarian",
-            "ovo vegetarian")
+            type: DataTypes.STRING,
+            allowNull: false
         }
     })
 }
