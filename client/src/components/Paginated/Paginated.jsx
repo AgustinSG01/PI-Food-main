@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./Paginated.css"
+import "./Paginated.css"
 
-export default function Paginated ({ recipes, recipesPerPage, paginated }) {
+export default function Paginated ({ recipes, recipesPerPage, paginated, nextPage, prevPage }) {
     const pageNum = []
 
     for (let i = 0; i < Math.ceil(recipes/recipesPerPage); i++) {
@@ -11,7 +11,7 @@ export default function Paginated ({ recipes, recipesPerPage, paginated }) {
     return (
         <footer>
             <ul>
-                <li><button className="buttonpage"> prev </button></li>
+                <li><button onClick={() => prevPage()} className="buttonpage"> {"<"} </button></li>
                 {
                    pageNum && pageNum.map(num => (
                         <li>
@@ -19,7 +19,7 @@ export default function Paginated ({ recipes, recipesPerPage, paginated }) {
                         </li>)
                     )
                 }
-                <li><button className="buttonpage"> next </button></li>
+                <li><button onClick={() => nextPage()} className="buttonpage"> {">"} </button></li>
             </ul>
         </footer>
     )

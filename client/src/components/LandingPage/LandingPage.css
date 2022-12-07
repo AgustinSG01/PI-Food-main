@@ -95,3 +95,14 @@
    .button:hover::before {
     width: 100%;
    }
+
+   @media screen and (max-width: 1024px){
+        .imageBackground {
+            display: none;
+        }
+        .logoandbutton {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+   }

@@ -37,13 +37,29 @@ export default function Home() {
   const lastRecipe = state.page * state.recipes;
   const firstRecipe = lastRecipe - state.recipes;
   const actualRecipes = recipes.slice(firstRecipe, lastRecipe);
-console.log(actualRecipes)
-  const paginated = (pageNum) => {
+  
+const paginated = (pageNum) => {
     setState({
       ...state,
       page: pageNum,
     });
   };
+
+  const nextPage = () => {
+    if (state.page === actualRecipes.length) setState ({...state, page: 1})
+    setState({
+      ...state,
+      page: state.page + 1
+    })
+  }
+
+  const prevPage = () => {
+    if (state.page === 1) setState ({...state, page: 1})
+    else setState({
+      ...state,
+      page: state.page - 1
+    })
+  }
 
   //despacho
   useEffect(async () => {
@@ -73,7 +89,6 @@ console.log(actualRecipes)
   //Funcion que ordena por healthScore
   async function handleOrderH(e) {
     e.preventDefault();
-    console.log(e.target.value)
     dispatch(filterOrderH(e.target.value));
     setState({
       ...state,
@@ -114,16 +129,17 @@ function handleSearch(e) {
       </nav>
       <div className="orderContainer">
         <select className="select" onChange={(e) => handleOrder(e)}>
-          <option value="">-</option>
+          <option value="">Alphabetically order</option>
           <option value="asc">A to Z</option>
           <option value="des">Z to A</option>
         </select>
         <select className="select" onChange={(e) => handleOrderH(e)}>
-          <option value="">-</option>
+          <option value="">Health score order</option>
           <option value="asc">Health Score asc</option>
           <option value="des">Health Score des</option>
         </select>
           <select className="select" onChange={(e) => handleFilter(e)}>
+            <option>Diets filter</option>
             <option value="All">All</option>
             {diets.map((r) => {
               return <option value={r}>{r}</option>;
@@ -149,6 +165,8 @@ function handleSearch(e) {
           recipes={recipes.length}
           recipesPerPage={state.recipes}
           paginated={paginated}
+          nextPage={nextPage}
+          prevPage={prevPage}
           key="paginated"
         />
       </div>
