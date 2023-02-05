@@ -10,7 +10,6 @@ function App() {
     <Router>
     <div className="App">
       <Route exact path="/" component={Landing}/>
-      {/* <Route path="/home" component={Nav}/> */}
       <Route exact path="/create" component={CreateRecipe}/>
       <Route exact path="/home" component={Home}/>
       <Route exact path= "/home/:id" component={DetailedFoodCard}/>

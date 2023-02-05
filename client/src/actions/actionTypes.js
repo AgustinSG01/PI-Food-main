@@ -1,7 +1,5 @@
 export const getRecipes = "GET_RECIPES"
-export const addRecipe = "ADD_RECIPE"
 export const getByID = "GET_ID"
-export const loading = "LOADING"
 export const getDiets = "GET_DIETS"
 export const filterByDiets = "FILTER_BY_DIETS"
 export const filterOrder = "FILTER_ORDER"

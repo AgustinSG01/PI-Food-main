@@ -11,7 +11,6 @@ export default function Landing () {
             </div>
             <div className="logoandbutton">
             <div className="logoContainer">
-            {/* <img src={logo} className="logo"/> */}
             <h1 className="titlelading">A good meal <br/> makes <br/>a good day</h1>
             </div >
             <div className="buttonContainer">

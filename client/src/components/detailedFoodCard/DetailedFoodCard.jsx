@@ -9,7 +9,7 @@ export default function DetailedFoodCard () {
     
     const dispatch = useDispatch()
     
-    const recipeID = useSelector((state) => state.detailRecipe)
+    let recipeID = useSelector((state) => state.detailRecipe)
     
     const {id} = useParams()
     
@@ -17,6 +17,9 @@ export default function DetailedFoodCard () {
 
     useEffect(() => {
         dispatch(getDetailRecipe(id))
+        return () => {
+            recipeID = {}
+        }
     },[dispatch])
 
     return (

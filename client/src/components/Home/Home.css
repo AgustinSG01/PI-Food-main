@@ -23,12 +23,13 @@
 .navbar {
     /* border: black solid; */
     background-color: #16181E;
-    height: 60px;
+    height: 8vh;
+    width: 100vw;
     flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .reload {

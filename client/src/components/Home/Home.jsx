@@ -30,6 +30,13 @@ export default function Home() {
     recipes: 9,
   });
 
+  useEffect(() => {
+    setState({
+      ...state,
+      page: 1
+    })
+  },[recipes])
+  
   const [order, setOrder] = useState("");
 
   const [search, setSearch] = useState("")
@@ -37,6 +44,7 @@ export default function Home() {
   const lastRecipe = state.page * state.recipes;
   const firstRecipe = lastRecipe - state.recipes;
   const actualRecipes = recipes.slice(firstRecipe, lastRecipe);
+  const allPages = Math.ceil(recipes.length / 9)
   
 const paginated = (pageNum) => {
     setState({
@@ -46,15 +54,15 @@ const paginated = (pageNum) => {
   };
 
   const nextPage = () => {
-    if (state.page === actualRecipes.length) setState ({...state, page: 1})
-    setState({
+    if (state.page >= allPages) setState ({...state, page: 1})
+    else setState({
       ...state,
       page: state.page + 1
     })
   }
 
   const prevPage = () => {
-    if (state.page === 1) setState ({...state, page: 1})
+    if (state.page === 1) setState ({...state, page: allPages})
     else setState({
       ...state,
       page: state.page - 1

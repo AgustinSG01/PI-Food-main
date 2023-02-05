@@ -76,8 +76,8 @@
 }
 
 .recipeSteps{
-    right: 330px;
-    top: 130px;
+    right: 21%;
+    top: 20%;
     position: absolute;
     margin-bottom: 20px;
     height: 50%;
@@ -129,6 +129,7 @@ legend {
 
 .eachStepcreate {
     width: 80%;
+    margin-top: 5%;
 }
 
 .dishtypeText {
